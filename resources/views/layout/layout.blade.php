@@ -70,7 +70,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <!-- <a class="nav-link" href="">Profile</a> -->
                                     <a class="nav-link" href="">Add Server</a>
-                                    <a class="nav-link" href="">Change Password</a>
+                                    <a class="nav-link" href="{{ route('updatePassword.form') }}">Change Password</a>
                                 </nav>
                             </div>
                             
