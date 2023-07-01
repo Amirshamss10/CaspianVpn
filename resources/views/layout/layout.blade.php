@@ -22,7 +22,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Hello {{Auth::user()->name}} </a>
+            <a class="navbar-brand ps-3" href="index.html">CaspianVpn</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -56,7 +56,7 @@
                     <div class="sb-sidenav-menu">
                         <!-- <div class="sb-sidenav-menu-heading"></div> -->
                         <div class="nav">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{route('dashboard.create')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                             </a>
@@ -73,20 +73,26 @@
                                     <a class="nav-link" href="{{ route('updatePassword.form') }}">Change Password</a>
                                 </nav>
                             </div>
-                            
+                          
+
+
+
                             <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
                             <!-- <a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fa fa-credit-card"></i></div>
                                 Portals
                             </a> -->
-
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('products.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
+                                product
+                            </a>
+                            <a class="nav-link" href="{{ route('devices.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fa fa-phone" aria-hidden=true></i></div>
                                 devices  
                             </a>
 
                             <a class="nav-link" href="">
-                                <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-wallet"></i></div>
                                 Transactions
                             </a>
                             <!-- <a class="nav-link" href="tables.html">
@@ -113,7 +119,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted"><b>Version 1.0.0</b>, {{ date("Y-m-d")}}</div>
+                            <div class="text-muted"><b>Laravel version is </b>{{ app()->version() }}</div>
                         </div>
                     </div>
                 </footer>

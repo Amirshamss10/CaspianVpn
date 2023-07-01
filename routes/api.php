@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\AppVersion;
+use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\priceController;
+use App\Http\Controllers\Api\V1\deviceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix("v1")->group(function(){
+
+    Route::post("devices", [deviceController::class, "store"])->middleware("auth:sanctum");
+        
+    Route::get("version", AppVersion::class)->middleware("auth:sanctum");
+
+    Route::get("categories", [priceController::class ,"index"])->middleware("auth:sanctum");
+
+    Route::get("categories/{category}", [priceController::class, "show"])->middleware("auth:sanctum");
+
 });
+
+Route::post("login", [AuthController::class, "login"]);
