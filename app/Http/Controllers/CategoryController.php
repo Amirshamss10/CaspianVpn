@@ -5,24 +5,68 @@ namespace App\Http\Controllers;
 use App\Models\price;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class CategoryController extends Controller
 {
-    public function index(Category $category) 
+    public function index() 
     {
-        $data = Category::with("prices")->get();
-        return view("product.index")->with(["data" => $data]);
+        $data = Category::with("prices")->orderBy("created_at", "desc")->get();
+
+        $productCount = price::all()->count();
+
+        if(empty($productCount)) {
+            return redirect()->route("products.create");
+        }
+
+        return view("product.index")->with(["data" => $data, "productCount" => $productCount]);
     }
 
-    public function show(Request $request,  $id) 
+    public function create() 
     {
-        $data = price::findOrFail($id);
-        return view("product.show", ["data" => $data]); 
+        $category = Category::all();
+
+        return view("product.create", ["category" => $category]);
     }
 
-    public function edit($id) 
+    public function store(ProductRequest $request) 
     {
-        // $data = price::findOrFail($id); 
-        // return view("product.edit", ["data"=> $data]); 
+        $data = price::create([
+            "category_id" => $request->category_id, 
+            "title" => $request->title, 
+            "price" => $request->price
+        ]);
+        return redirect()->route("products.show", $data->id)->with("addProduct", true);
     }
+
+    public function show(Request $request,  price $price) 
+    {
+        return view("product.show", ["data" => $price]); 
+    }
+
+    public function edit(price $price) 
+    {
+        $category = Category::all();
+
+        return view("product.edit", ["product"=> $price, "category" => $category]);
+    }
+
+    public function update(ProductRequest $request, price $price) 
+    {
+        $price->update([
+            "category_id" => $request->category_id,
+            "price" => $request->price,
+            "title"=> $request->title
+        ]);
+
+        return redirect()->route("products.show", $price->id)->with("updateProduct", true);
+    }
+
+    public function destroy(Request $request, price $price) 
+    {
+        $price->delete(); 
+        
+        return redirect()->route("products.index")->with("deleteProduct", true); 
+    }
+   
 }

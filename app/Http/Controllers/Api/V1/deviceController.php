@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\User;
+use App\Models\config;
 use App\Models\device;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ConfigResource;
 
 class deviceController extends Controller
 {
     public function store(Request $request) 
     {
         $this->validateStore($request); 
+        
+        $config = config::all(); 
 
         device::create([
             "android_id" => $request->android_id, 

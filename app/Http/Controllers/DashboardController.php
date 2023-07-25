@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\device;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,6 +12,7 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view("home");
+        $totalUser = device::all()->count();
+        return view("home", ["totalUser" => $totalUser]);
     }
 }

@@ -18,6 +18,7 @@
             background-color: #f2f2f2;
         }
 </style>
+@include('layout.alerts')
 <div class="table-responsive" style="overflow-x:auto;">
 <table class="table" dir="rtl">
 <thead>
@@ -28,21 +29,23 @@
       <th scope="col">زمان ایجاد</th>
       <th scope="col">اخرین بروزرسانی</th>
       <th scope="col">وضعیت</th>
-
     </tr>
   </thead>
 
   <tbody>
       <tr>       
       <th scope="row">{{$data->title}}</th>
-      <td>{{number_format($data->price) }}</td>
+      <td style="color:green"><b>{{number_format($data->price) }}</b></td>
       <td>  <b>{{ $data->category->title }}</b></td>  
-      <td>1403/4/03</td>
-      <td>1403/4/7</td>
+      <td>{{ $data->created_at}}</td>
+      <td>{{ $data->updated_at }}</td>
 
       <td> 
-        <a href="" class="edit btn btn-success"><li class="fas fa-edit"></li>بروزرسانی</a>                    
-          <a href="" class="edit btn btn-danger"><li class="fas fa-skull-crossbones"></li>حذف</a>                  
+        <a href="{{ route('products.edit', $data->id) }}" class="edit btn btn-success"><li class="fas fa-edit"></li>بروزرسانی</a>              
+        <form action="{{ route('products.destroy', $data->id) }}" method="post">
+          @csrf
+          <button class="edit btn btn-danger"><li class="fa fa-trash"></li>حذف</button>                  
+        </form>      
         </td>
     </tr>
   </tbody>

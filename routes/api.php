@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AppVersion;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\priceController;
+use App\Http\Controllers\Api\V1\ConfigController;
 use App\Http\Controllers\Api\V1\deviceController;
 
 /*
@@ -21,12 +22,15 @@ Route::prefix("v1")->group(function(){
 
     Route::post("devices", [deviceController::class, "store"])->middleware("auth:sanctum");
         
-    Route::get("version", AppVersion::class)->middleware("auth:sanctum");
+    Route::get("version", AppVersion::class);
 
-    Route::get("categories", [priceController::class ,"index"])->middleware("auth:sanctum");
+    Route::get("products", [priceController::class ,"index"]);
 
-    Route::get("categories/{category}", [priceController::class, "show"])->middleware("auth:sanctum");
+    Route::get("products/{category}", [priceController::class, "show"]);
 
+    Route::get("configs", [ConfigController::class, "index"]); 
+
+    Route::get("configs/{config}", [ConfigController::class, "destroy"]);
 });
 
 Route::post("login", [AuthController::class, "login"]);

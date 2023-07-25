@@ -11,45 +11,10 @@
 @endif
 
 
-@if(session('registered'))
-  <div class='alert alert-success'>
-  Your registration was successful
-  </div>
-@endif 
 
 
-@if (session('hasVerifyEmail'))
-<div class="alert alert-danger">
-  Please confirm your email, We have sent you an email with a link!
-  <a href=<?php echo 'http://'.$_SERVER['HTTP_HOST']. '/auth/email/send-verification'?> > Click!</a>
-</div>
-@endif
-
-@if(session('verificationEmailSent')) 
-  <div class='alert alert-success'>
-    Check Your Email Box {{ auth()->user()->email }}
-  </div>
-@endif
 
 
-@if(session('emailHasVerified'))
-  <div class="alert alert-success">
-  Your account has been successfully authenticated
-  </div>
-@endif
-
-@if(session('resetLinkSent'))
-  <div class="alert alert-success">
-  Password recovery email sent successfully
-  </div>
-@endif
-
-
-@if(session('resetLinkfailed'))
-  <div class="alert alert-danger">
-  Failed to send password recovery email
-  </div>
-@endif 
 
 @if(session('cantChangePassword'))
   <div class="alert alert-danger">
@@ -70,14 +35,26 @@
 @endif 
 
 @if(session('changePassword'))
-  <div class="alert alert-success">
+    <div class="alert alert-success">
   Password changed successfully
   </div>
 @endif 
 
-@if(session("CreatePortal"))
-  <div class="alert alert-success">
-    <p style="color:red">    این توکن را در  ذخیره کنید چون تنها یک بار نمایش داده میشود</p>
-    {{ session("CreatePortal") }}
+@if(session('updateProduct'))
+  <div  class="alert alert-success" dir="rtl">
+    بروزرسانی محصول با موفقیت ا نجام شد
   </div>
-@endif 
+@endif
+
+@if (session("deleteProduct"))
+  <div class="alert alert-danger" dir="rtl">
+    محصول مورد نظر حذف شد
+  </div>
+@endif
+
+@if(session("addProduct"))
+  <div class="alert alert-success" dir="rtl">
+    یک محصول با موفقیت اضافه شد 
+  </div>
+@endif
+

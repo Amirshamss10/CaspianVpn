@@ -13,17 +13,17 @@ class Category extends Model
 
     protected $fillable = ["title"];
 
-    protected $hidden = ["id", "created_at", "updated_at"];
-
+    public $name = "AmirShams";
+    
     public function getRouteKeyName() 
     {
         return "id";
     }
 
 
-    public function prices(): HasMany
+    public function prices()
     {
-        return $this->hasMany(price::class, "category_id");
+        return $this->hasMany(price::class);
     } 
 
 }

@@ -22,13 +22,13 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">CaspianVpn</a>
+            <a class="navbar-brand ps-3" href="{{ route('dashboard.create') }}">CaspianVpn</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                  <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for DeviceID" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                    <input class="form-control" type="text" placeholder="Search for TransactionID" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div> 
             </form>
@@ -41,8 +41,9 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{Auth::user()->name}} </a>
                     <!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a> -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">add server</a></li>
-                        <li><a class="dropdown-item" href="#!">Change Password</a></li>
+                    <li><a class="dropdown-item" href="{{route('products.create') }}">add product</a></li>
+                    <li><a class="dropdown-item" href="{{route('configs.create') }}">Add free config</a></li>
+
                         <!-- <li><a class="dropdown-item" href="#!">Profile</a></li> -->
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="">Logout</a></li>
@@ -69,7 +70,6 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <!-- <a class="nav-link" href="">Profile</a> -->
-                                    <a class="nav-link" href="">Add Server</a>
                                     <a class="nav-link" href="{{ route('updatePassword.form') }}">Change Password</a>
                                 </nav>
                             </div>
@@ -83,12 +83,17 @@
                                 Portals
                             </a> -->
                             <a class="nav-link" href="{{ route('products.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa fa-building"></i></div>
-                                product
+                                <div class="sb-nav-link-icon"><i class="fa fa-industry"></i></div>
+                                Production
                             </a>
+                            <a class="nav-link" href="{{ route('configs.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-key"></i></div>
+                                VPN Free
+                            </a>
+                            
                             <a class="nav-link" href="{{ route('devices.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fa fa-phone" aria-hidden=true></i></div>
-                                devices  
+                                Mobile  
                             </a>
 
                             <a class="nav-link" href="">

@@ -15,7 +15,8 @@ class CategorySeeder extends Seeder
     {
         $categories = array(
             "ماهانه",  
-            "دو ماهه"
+            "۳ ماهه",
+            "۶ ماهه"
         );
 
         foreach($categories AS $categoryName) 

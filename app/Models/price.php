@@ -10,7 +10,9 @@ class price extends Model
 {
     use HasFactory;
 
-    // protected $hidden = ["id", "category_id", "created_at", "updated_at"];
+    protected $fillable = ["category_id", "price", "title"];
+
+    protected $appends = ["total_Product"];
 
     public function getRouteKeyName() 
     {
@@ -19,7 +21,7 @@ class price extends Model
 
     public function getTotalProductAttribute() 
     {
-        return $this->count();
+        return $this::all()->count();
     }
 
     public function category()  

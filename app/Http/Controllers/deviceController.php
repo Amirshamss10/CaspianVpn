@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
+use App\Models\User;
+use App\Models\config;
 use App\Models\device;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,28 +13,23 @@ class deviceController extends Controller
 {
     public function index(Request $request) 
     {
-        $devices = device::all()->count();
-        // $devices = DB::table("devices")->get();
-        return view("devices", ["count"=> $devices]); 
+       $total = device::all()->count();
+       return view("users", ["total"=> $total]);
     }
 
     public function create(Request $request)    
     {
-        // $devices = DB::table("devices")->get();
-        // $data = device::where("android_id","oijdiowjeodwdjiojeoi")->get();
-
-        
         if ($request->ajax()) {
-            $devices = device::where("id", 1)->get();
-            return Datatables::of($devices) 
+            $data =  device::latest()->get();
+            return Datatables::of($data) 
             ->addIndexColumn()  
             ->addColumn('action', function($row){
                     $route = $row->id;
                     $actionBtn = "<a href='$route'" . 'class="edit btn btn-success btn-sm">detail</a>';                       
-                    return "message";
+                    return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        }         
+        }
     }
 }
